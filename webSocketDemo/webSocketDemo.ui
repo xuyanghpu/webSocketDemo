@@ -1,0 +1,1648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>webSocketDemoClass</class>
+ <widget class="QMainWindow" name="webSocketDemoClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1198</width>
+    <height>735</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>webSocket服务器</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="webSocketDemo.qrc">
+    <normaloff>:/webSocketDemo/Resources/set.png</normaloff>:/webSocketDemo/Resources/set.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/**********子界面背景**********/
+QWidget#customWidget {
+        background: rgb(173, 202, 232);
+}
+
+/**********子界面中央背景**********/
+QWidget#centerWidget {
+        background: rgb(232, 241, 252);
+}
+
+/**********主界面样式**********/
+QWidget#mainWindow {
+        border: 1px solid rgb(111, 156, 207);
+        background: rgb(232, 241, 252);
+}
+
+QWidget#messageWidget {
+        background: rgba(173, 202, 232, 50%);
+}
+
+QWidget#loadingWidget {
+        border: none;
+        border-radius: 5px;
+        background: rgb(187, 212, 238);
+}
+
+QWidget#remoteWidget {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border: 1px solid rgb(111, 156, 207);
+        border-left: none;
+        background: transparent;
+}
+
+StyledWidget {
+        qproperty-normalColor: rgb(65, 65, 65);
+        qproperty-disableColor: rgb(180, 180, 180);
+        qproperty-highlightColor: rgb(0, 160, 230);
+        qproperty-errorColor: red;
+}
+
+QProgressIndicator {
+        qproperty-color: rgb(2, 65, 132);
+}
+
+/**********提示**********/
+QToolTip{
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+        color: rgb(51, 51, 51);
+}
+
+QMessagebox{
+border: 1px solid rgb(111, 156, 207);
+background: white;
+color: rgb(51, 51, 51);
+}
+/*********工具箱********/
+QToolBox{      
+	background: rgb(202, 221, 255);
+}
+QToolBox::tab {   
+	height: 25px;   
+	background: rgb(202, 200, 245);
+	color: rgb(255, 255, 255);
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border: 1px solid rgb(111, 156, 207);
+	border-left: none;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+QToolBox::tab:selected {      
+	color: rgb(255, 255, 255);	    
+	background:rgb(2, 65, 132);
+	
+}
+
+QToolBox::tab:hover {       
+	color: rgb(255, 255, 255);	    
+	background-color: rgb(2, 86, 171);
+}
+QToolBoxButton { 
+	min-height:25px;
+}
+
+/**********菜单栏**********/
+QMenuBar {
+        background: rgb(187, 212, 238);
+        border: 1px solid rgb(111, 156, 207);
+        border-left: none;
+        border-right: none;
+}
+QMenuBar::item {
+        border: 1px solid transparent;
+        padding: 5px 10px 5px 10px;
+        background: transparent;
+}
+QMenuBar::item:enabled {
+        color: rgb(2, 65, 132);
+}
+QMenuBar::item:!enabled {
+        color: rgb(155, 155, 155);
+}
+QMenuBar::item:enabled:selected {
+        border-top-color: rgb(111, 156, 207);
+        border-bottom-color: rgb(111, 156, 207);
+        background: rgb(198, 224, 252);
+}
+
+/**********菜单**********/
+QMenu {
+        border: 1px solid rgb(111, 156, 207);
+        background: rgb(232, 241, 250);
+}
+QMenu::item {
+        height: 22px;
+        padding: 0px 25px 0px 20px;
+}
+QMenu::item:enabled {
+        color: rgb(84, 84, 84);
+}
+QMenu::item:!enabled {
+        color: rgb(155, 155, 155);
+}
+QMenu::item:enabled:selected {
+        color: rgb(2, 65, 132);
+        background: rgba(255, 255, 255, 200);
+}
+QMenu::separator {
+        height: 1px;
+        background: rgb(111, 156, 207);
+}
+QMenu::indicator {
+        width: 13px;
+        height: 13px;
+}
+QMenu::icon {
+        padding-left: 2px;
+        padding-right: 2px;
+}
+
+/**********状态栏**********/
+QStatusBar {
+        background: rgb(187, 212, 238);
+        border: 1px solid rgb(111, 156, 207);
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+}
+QStatusBar::item {
+    border: none;
+    border-right: 1px solid rgb(111, 156, 207);
+}
+
+/********富文本编辑框******************/
+QTextEdit{
+        border-radius: 5px;
+        background: rgb(187, 212, 238);
+}
+QTextEdit::indicator:unenabled {
+		border-radius: 5px;
+        background: rgb(187, 212, 238);
+}
+
+/**********分组框**********/
+QGroupBox {
+        font-size: 13px;
+        border: 1px solid rgb(111, 156, 207);
+        border-radius: 4px;
+        margin-top: 14px;
+}
+QGroupBox::title {
+        color: rgb(56, 99, 154);
+        top: -12px;
+        left: 10px;
+}
+
+/**********页签项**********/
+QTabWidget::pane {
+        border: none;
+        border-top: 3px solid rgb(0, 78, 161);
+        background: rgb(187, 212, 238);
+}
+QTabWidget::tab-bar {
+        border: none;
+}
+QTabBar::tab {
+        border: none;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        color: white;
+        background: rgb(120, 170, 220);
+        height: 28px;
+        min-width: 85px;
+        margin-right: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+}
+QTabBar::tab:hover {
+        background: rgb(0, 78, 161);
+}
+QTabBar::tab:selected {
+        color: white;
+        background: rgb(0, 78, 161);
+}
+
+QTabWidget#tabWidget::pane {
+        border: 1px solid rgb(111, 156, 207);
+        background: rgb(232, 241, 252);
+        margin-top: -1px;
+}
+
+QTabBar#tabBar::tab {
+        border: 1px solid rgb(111, 156, 207);
+        border-bottom: none;
+        color: rgb(70, 71, 73);
+        background: transparent;
+}
+QTabBar#tabBar::tab:hover {
+        color: rgb(2, 65, 132);
+}
+QTabBar#tabBar::tab:selected {
+        color: rgb(2, 65, 132);
+        background: rgb(232, 241, 252);
+}
+
+/**********表头**********/
+QHeaderView{
+        border: none;
+        border-bottom: 3px solid rgb(0, 78, 161);
+        background: transparent;
+        min-height: 25px;
+}
+QHeaderView::section:horizontal {
+        border: none;
+        color: rgb(2, 65, 132);
+        background: transparent;
+        padding-left: 5px;
+}
+QHeaderView::section:horizontal:hover {
+        color: white;
+        background: rgb(0, 78, 161);
+}
+QHeaderView::section:horizontal:pressed {
+        color: white;
+        background: rgb(6, 94, 187);
+}
+QHeaderView::up-arrow {
+        width: 13px;
+        height: 11px;
+        padding-right: 5px;
+        image: url(:/White/topArrow);
+        subcontrol-position: center right;
+}
+QHeaderView::up-arrow:hover, QHeaderView::up-arrow:pressed {
+        image: url(:/White/topArrowHover);
+}
+QHeaderView::down-arrow {
+        width: 13px;
+        height: 11px;
+        padding-right: 5px;
+        image: url(:/White/bottomArrow);
+        subcontrol-position: center right;
+}
+QHeaderView::down-arrow:hover, QHeaderView::down-arrow:pressed {
+        image: url(:/White/bottomArrowHover);
+}
+
+/**********表格**********/
+QTableView {
+        border: 1px solid rgb(111, 156, 207);
+        background: rgb(224, 238, 255);
+        gridline-color: rgb(111, 156, 207);
+}
+QTableView::item {
+        padding-left: 2px;
+        padding-right: 2px;
+        border: none;
+        background: white;
+        border-right: 1px solid rgb(111, 156, 207);
+        border-bottom: 1px solid rgb(111, 156, 207);	
+		selection-color: rgb(0, 85, 255);
+}
+QTableView::item:selected {
+        background: rgba(255, 255, 255, 100);
+}
+QTableView::item:selected:!active {
+        color: rgb(65, 65, 65);
+}
+QTableView::indicator {
+        width: 20px;
+        height: 20px;
+}
+QTableView::indicator:enabled:unchecked {
+        image: url(:/White/checkBox);
+}
+QTableView::indicator:enabled:unchecked:hover {
+        image: url(:/White/checkBoxHover);
+}
+QTableView::indicator:enabled:unchecked:pressed {
+        image: url(:/White/checkBoxPressed);
+}
+QTableView::indicator:enabled:checked {
+        image: url(:/White/checkBoxChecked);
+}
+QTableView::indicator:enabled:checked:hover {
+        image: url(:/White/checkBoxCheckedHover);
+}
+QTableView::indicator:enabled:checked:pressed {
+        image: url(:/White/checkBoxCheckedPressed);
+}
+QTableView::indicator:enabled:indeterminate {
+        image: url(:/White/checkBoxIndeterminate);
+}
+QTableView::indicator:enabled:indeterminate:hover {
+        image: url(:/White/checkBoxIndeterminateHover);
+}
+QTableView::indicator:enabled:indeterminate:pressed {
+        image: url(:/White/checkBoxIndeterminatePressed);
+}
+
+/**********树结构**********/
+QTreeView {
+        border: 1px solid rgb(111, 156, 207);
+        background: rgb(224, 238, 255);
+        gridline-color: rgb(111, 156, 207);
+}
+QTreeView::item {
+        padding-left: 2px;
+        padding-right: 2px;
+        border: none;
+        background: white;
+        border-right: 1px solid rgb(111, 156, 207);
+        border-bottom: 1px solid rgb(111, 156, 207);	
+		selection-color: rgb(0, 85, 255);
+}
+QTreeView::item:selected {
+        background: rgba(255, 255, 255, 100);
+}
+QTreeView::item:selected:!active {
+        color: rgb(65, 65, 65);
+}
+QTreeView::indicator {
+        width: 20px;
+        height: 20px;
+}
+QTreeView::indicator:enabled:unchecked {
+        image: url(:/White/checkBox);
+}
+QTreeView::indicator:enabled:unchecked:hover {
+        image: url(:/White/checkBoxHover);
+}
+QTreeView::indicator:enabled:unchecked:pressed {
+        image: url(:/White/checkBoxPressed);
+}
+QTreeView::indicator:enabled:checked {
+        image: url(:/White/checkBoxChecked);
+}
+QTreeView::indicator:enabled:checked:hover {
+        image: url(:/White/checkBoxCheckedHover);
+}
+QTreeView::indicator:enabled:checked:pressed {
+        image: url(:/White/checkBoxCheckedPressed);
+}
+QTreeView::indicator:enabled:indeterminate {
+        image: url(:/White/checkBoxIndeterminate);
+}
+QTreeView::indicator:enabled:indeterminate:hover {
+        image: url(:/White/checkBoxIndeterminateHover);
+}
+QTreeView::indicator:enabled:indeterminate:pressed {
+        image: url(:/White/checkBoxIndeterminatePressed);
+}
+
+/**********滚动条-水平**********/
+QScrollBar:horizontal {
+        height: 20px;
+        background: transparent;
+        margin-top: 3px;
+        margin-bottom: 3px;
+}
+QScrollBar::handle:horizontal {
+        height: 20px;
+        min-width: 30px;
+        background: rgb(170, 200, 230);
+        margin-left: 15px;
+        margin-right: 15px;
+}
+QScrollBar::handle:horizontal:hover {
+        background: rgb(165, 195, 225);
+}
+QScrollBar::sub-line:horizontal {
+        width: 15px;
+        background: transparent;
+        image: url(:/Check/Resources/data_left.png);
+        subcontrol-position: left;
+}
+QScrollBar::add-line:horizontal {
+        width: 15px;
+        background: transparent;
+        image: url(:/Check/Resources/data_right.png);
+        subcontrol-position: right;
+}
+QScrollBar::sub-line:horizontal:hover {
+        background: rgb(170, 200, 230);
+}
+QScrollBar::add-line:horizontal:hover {
+        background: rgb(170, 200, 230);
+}
+QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal {
+        background: transparent;
+}
+
+/**********滚动条-垂直**********/
+QScrollBar:vertical {
+        width: 20px;
+        background: transparent;
+        margin-left: 3px;
+        margin-right: 3px;
+}
+QScrollBar::handle:vertical {
+        width: 20px;
+        min-height: 30px;
+        background: rgb(170, 200, 230);
+        margin-top: 15px;
+        margin-bottom: 15px;
+}
+QScrollBar::handle:vertical:hover {
+        background: rgb(165, 195, 225);
+}
+QScrollBar::sub-line:vertical {
+        height: 15px;
+        background: transparent;
+        image: url(:/Check/Resources/data_up.png);
+        subcontrol-position: top;
+}
+QScrollBar::add-line:vertical {
+        height: 15px;
+        background: transparent;
+        image: url(:/Check/Resources/data_down.png);
+        subcontrol-position: bottom;
+}
+QScrollBar::sub-line:vertical:hover {
+        background: rgb(170, 200, 230);
+}
+QScrollBar::add-line:vertical:hover {
+        background: rgb(170, 200, 230);
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+        background: transparent;
+}
+
+QScrollBar#verticalScrollBar:vertical {
+        margin-top: 30px;
+}
+
+/**********下拉列表**********/
+QComboBox {
+		color: rgb(56, 99, 154);
+        height: 25px;
+        border-radius: 4px;
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+}
+QComboBox:enabled {
+        color: rgb(84, 84, 84);
+}
+QComboBox:!enabled {
+        color: rgb(80, 80, 80);
+}
+QComboBox:enabled:hover, QComboBox:enabled:focus {
+        color: rgb(51, 51, 51);
+}
+QComboBox::drop-down {
+        width: 20px;
+        border: none;
+        background: transparent;
+}
+QComboBox::drop-down:hover {
+        background: rgba(255, 255, 255, 30);
+}
+QComboBox::down-arrow {
+	image: url(:/webSocketDemo/Resources/data_down.png);
+}
+QComboBox::down-arrow:on {
+        /**top: 1px;**/
+}
+QComboBox QAbstractItemView {
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+        outline: none;
+}
+QComboBox QAbstractItemView::item {
+        height: 35px;
+        color: rgb(73, 73, 73);
+}
+QComboBox QAbstractItemView::item:selected {
+        background: rgb(232, 241, 250);
+        color: rgb(2, 65, 132);
+}
+
+/**********进度条**********/
+QProgressBar{
+        border: none;
+        text-align: center;
+        color: white;
+        background: rgb(173, 202, 232);
+}
+QProgressBar::chunk {
+        background: rgb(16, 135, 209);
+}
+
+QProgressBar#progressBar {
+        border: none;
+        text-align: center;
+        color: white;
+        background-color: transparent;
+        background-image: url(&quot;:/White/progressBar&quot;);
+        background-repeat: repeat-x;
+}
+QProgressBar#progressBar::chunk {
+        border: none;
+        background-color: transparent;
+        background-image: url(&quot;:/White/progressBarChunk&quot;);
+        background-repeat: repeat-x;
+}
+
+/**********复选框**********/
+QCheckBox{
+		color: rgb(56, 99, 154);
+        spacing: 5px;
+}
+QCheckBox:enabled:checked{
+        color: rgb(2, 65, 132);
+}
+QCheckBox:enabled:!checked{
+        color: rgb(70, 71, 73);
+}
+QCheckBox:enabled:hover{
+        color: rgb(0, 78, 161);
+}
+QCheckBox:!enabled{
+        color: rgb(80, 80, 80);
+}
+QCheckBox::indicator {
+        width: 20px;
+        height: 20px;
+}
+
+
+QCheckBox::indicator:unchecked {
+	image: url(:/Check/Resources/check_no.png);
+}
+QCheckBox::indicator:unchecked:hover {
+	image: url(:/Check/Resources/check_no.png);
+}
+ QCheckBox::indicator:unchecked:pressed {
+	image: url(:/Check/Resources/check_no.png);
+}
+QCheckBox::indicator:checked {
+	image: url(:/Check/Resources/check_yes.png);
+}
+QCheckBox::indicator:checked:hover {
+	image: url(:/Check/Resources/check_yes.png);
+}
+QCheckBox::indicator:checked:pressed {
+	image: url(:/Check/Resources/check_yes.png);
+}
+QCheckBox::indicator:indeterminate {
+	image: url(:/Check/Resources/check_indeterminate.png);
+}
+QCheckBox::indicator:indeterminate:hover {
+	image: url(:/Check/Resources/check_indeterminate.png);
+}
+ QCheckBox::indicator:indeterminate:pressed {
+	image: url(:/Check/Resources/check_indeterminate.png);
+}
+
+/**********单选框**********/
+QRadioButton{
+		color: rgb(56, 99, 154);
+        spacing: 5px;
+}
+QRadioButton:enabled:checked{
+        color: rgb(2, 65, 132);
+}
+QRadioButton:enabled:!checked{
+        color: rgb(70, 71, 73);
+}
+QRadioButton:enabled:hover{
+        color: rgb(0, 78, 161);
+}
+QRadioButton:!enabled{
+        color: rgb(80, 80, 80);
+}
+QRadioButton::indicator {
+        width: 20px;
+        height: 20px;
+}
+QRadioButton::indicator:unchecked {
+        image: url(:/White/radioButton);
+}
+QRadioButton::indicator:unchecked:hover {
+        image: url(:/White/radioButtonHover);
+}
+QRadioButton::indicator:unchecked:pressed {
+        image: url(:/White/radioButtonPressed);
+}
+QRadioButton::indicator:checked {
+        image: url(:/White/radioButtonChecked);
+}
+QRadioButton::indicator:checked:hover {
+        image: url(:/White/radioButtonCheckedHover);
+}
+QRadioButton::indicator:checked:pressed {
+        image: url(:/White/radioButtonCheckedPressed);
+}
+
+/**********日期时间编辑框**********/
+QDateTimeEdit {
+        border-radius: 4px;
+        height: 24px;
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+		min-width:140px;
+		max-width:150px;
+}
+QDateTimeEdit:enabled {
+        color: rgb(60, 60, 60);
+}
+QDateTimeEdit:enabled:hover, QSpinBox:enabled:focus {
+        color: rgb(51, 51, 51);
+}
+QDateTimeEdit:!enabled {
+        color: rgb(0, 0, 0);
+        background: transparent;
+}
+QDateTimeEdit::up-button {
+        border-left: 1px solid rgb(111, 156, 207);
+        width: 18px;
+        height: 12px;
+        border-top-right-radius: 4px;
+        image: url(:/Check/Resources/topArrow.png);
+}
+QDateTimeEdit::up-button:!enabled {
+        background: transparent;
+}
+QDateTimeEdit::up-button:enabled:hover {
+        background: rgb(255, 255, 255, 30);
+}
+QDateTimeEdit::down-button {
+        border-left: 1px solid rgb(111, 156, 207);
+        width: 18px;
+        height: 12px;
+        border-bottom-right-radius: 4px;
+        image: url(:/Check/Resources/bottomArrow.png);
+}
+QDateTimeEdit::down-button:!enabled {
+        background: transparent;
+}
+QDateTimeEdit::down-button:hover {
+        background: rgb(255, 255, 255, 30);
+}
+/**********时间编辑框**********/
+QTimeEdit {
+        border-radius: 4px;
+        height: 20px;
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+		min-width:90px;
+		max-width:100px;
+}
+
+/**********输入框**********/
+QLineEdit {
+        border-radius: 4px;
+        height: 20px;
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+		min-width: 60px;
+}
+QLineEdit:enabled {
+        color: rgb(84, 84, 84);
+}
+QLineEdit:enabled:hover, QLineEdit:enabled:focus {
+        color: rgb(51, 51, 51);
+}
+QLineEdit:!enabled {
+        color: rgb(80, 80, 80);
+}
+
+/**********文本编辑框**********/
+QTextEdit {
+        border: 1px solid rgb(111, 156, 207);
+        color: rgb(70, 71, 73);
+        background: rgb(187, 212, 238);
+}
+
+/**********滚动区域**********/
+QScrollArea {
+        border: 1px solid rgb(111, 156, 207);
+        background: rgb(187, 212, 238);
+}
+
+/**********滚动区域**********/
+QWidget#transparentWidget {
+        background: transparent;
+}
+
+/**********微调器**********/
+QSpinBox {
+        border-radius: 4px;
+        height: 24px;
+        min-width: 40px;
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+}
+QSpinBox:enabled {
+        color: rgb(60, 60, 60);
+}
+QSpinBox:enabled:hover, QSpinBox:enabled:focus {
+        color: rgb(51, 51, 51);
+}
+QSpinBox:!enabled {
+        color: rgb(10, 10, 10);
+        background: transparent;
+}
+QSpinBox::up-button {
+        border-left: 1px solid rgb(111, 156, 207);
+        width: 18px;
+        height: 12px;
+        border-top-right-radius: 4px;
+        image: url(:/Check/Resources/topArrow.png);
+}
+QSpinBox::up-button:!enabled {
+        background: transparent;
+}
+QSpinBox::up-button:enabled:hover {
+        background: rgb(255, 255, 255, 30);
+}
+QSpinBox::down-button {
+        border-left: 1px solid rgb(111, 156, 207);
+        width: 18px;
+        height: 12px;
+        border-bottom-right-radius: 4px;
+        image: url(:/Check/Resources/bottomArrow.png);
+}
+QSpinBox::down-button:!enabled {
+        background: transparent;
+}
+QSpinBox::down-button:hover {
+        background: rgb(255, 255, 255, 30);
+}
+
+/**********标签**********/
+QLabel{
+ 	color: rgb(56, 99, 154);
+}
+
+
+/**********按钮**********/
+QToolButton{
+        border-radius: 4px;
+        border: none;
+        width: 75px;
+        height: 25px;
+}
+QToolButton:enabled {
+        background: rgb(120, 170, 220);
+        color: white;
+}
+QToolButton:!enabled {
+        background: rgb(180, 180, 180);
+        color: white;
+}
+QToolButton:enabled:hover{
+        background: rgb(100, 160, 220);
+}
+QToolButton:enabled:pressed{
+        background: rgb(0, 78, 161);
+}
+
+
+/**********按钮**********/
+QPushButton{
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(111, 156, 207);
+    border-radius: 4px;                                   
+    width: 75px;
+    height: 25px;
+	background-color: rgb(145, 192, 206);
+	background-color: rgb(58, 105, 156);
+	border-style: outset;
+}
+
+QPushButton:hover{
+	background-color: rgb(38, 167, 206);
+	background-color: rgb(42, 77, 116);
+	background-color: rgb(50, 65, 156);
+	background-color: rgb(58, 105, 127);
+	background-color: rgb(71, 130, 185);
+}
+
+QPushButton:pressed{
+	background-color: rgb(99, 174, 206);
+	background-color: rgb(67, 120, 179);
+	border-style: inset; 
+}
+
+QPushButton:!enabled {
+        background: rgb(180, 180, 180);
+        color: white;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_7">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>地址：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>ws://0.0.0.0:4141</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>网关电台本址：</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="text">
+           <string>242001</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>远端电台本址：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_3">
+          <property name="text">
+           <string>242005</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QToolBox" name="toolBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>3</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>3</height>
+         </size>
+        </property>
+        <widget class="QWidget" name="toolBoxPage2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>248</width>
+           <height>503</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>探测/追踪/呼叫</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_radioOpen">
+            <property name="text">
+             <string>电台开机</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="5">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_beginTC">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>探测电台</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pushButton_radioClose">
+            <property name="text">
+             <string>电台关机</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="4" rowspan="2">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>17</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="5" column="0" rowspan="2">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>追踪电台</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>探测电台</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="pushButton_stopTC">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>停止探测</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="5">
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="7" column="2">
+           <widget class="QPushButton" name="pushButton_stopZZ">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>停止追踪</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0" colspan="5">
+           <widget class="Line" name="line_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>呼叫电台</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>模式：</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_beginZZ">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>追踪电台</string>
+            </property>
+           </widget>
+          </item>
+          <item row="12" column="1">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>276</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="11" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_beginCall">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>呼叫电台</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="3" colspan="2">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>33</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="10" column="1" colspan="4">
+           <widget class="QComboBox" name="comboBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>业务考核模式</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>考核呼叫模式</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>248</width>
+           <height>503</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>设置网关</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Vox输入门限：</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Vox输出门限：</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>输入降噪等级：</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_5">
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>7</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>输出增益等级：</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="pushButton_setCfg">
+            <property name="text">
+             <string>设置</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>363</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_4">
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>7</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_2">
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>7</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_3">
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>7</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="4" column="0">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>274</width>
+           <height>503</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>短消息</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="4" column="0" colspan="3">
+           <widget class="QTextEdit" name="textEdit_2"/>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>123</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="pushButton_sendMessage">
+            <property name="text">
+             <string>发送短消息</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QTextEdit" name="textEdit">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="3">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>接收短消息</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_12">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>编辑短消息</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_3">
+         <attribute name="label">
+          <string>自定义消息</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="2" column="0">
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>170</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pushButton_sendselfmessage">
+            <property name="text">
+             <string>发送</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QTextEdit" name="textEdit_3"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>消息编辑框</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>3</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="title">
+       <string>指令消息区</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_clean">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>清屏</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QTextBrowser" name="textBrowser">
+         <property name="tabChangesFocus">
+          <bool>false</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="webSocketDemo.qrc"/>
+ </resources>
+ <connections/>
+</ui>

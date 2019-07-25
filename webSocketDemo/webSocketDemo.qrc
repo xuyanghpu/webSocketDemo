@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/webSocketDemo">
+        <file>Resources/s.png</file>
+        <file>Resources/save.png</file>
+        <file>Resources/save00.png</file>
+        <file>Resources/set.png</file>
+        <file>Resources/setting.png</file>
+        <file>Resources/setting00.png</file>
+        <file>Resources/ts.png</file>
+        <file>Resources/data_down.png</file>
+    </qresource>
+</RCC>

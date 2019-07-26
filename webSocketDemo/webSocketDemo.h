@@ -7,6 +7,14 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QList>
+#include <QStringList>
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+
+#include <QStandardItemModel>
+
 #include "ui_webSocketDemo.h"
 class SocketConnection;
 
@@ -48,12 +56,22 @@ private slots:
 
 	void on_pushButton_sendselfmessage_clicked();
 
+	void on_lineEdit_2_textChanged(QString s);
+	void on_lineEdit_3_textChanged(QString s);
+
 private:
 	QTcpServer listener_;
 	QList<SocketConnection *> connect_socket_list_;
 
 	void Send(const QString& msg);
+	void DealRecvMessage(QString msg);
+	void showMessage(QString value);
+	QString toStringJsonArray(QJsonArray & arr);
 private:
 	Ui::webSocketDemoClass ui;
+	QStringList ctrlist;
+
+	QStandardItemModel * model1;
+	QStandardItemModel * model2;
 
 };

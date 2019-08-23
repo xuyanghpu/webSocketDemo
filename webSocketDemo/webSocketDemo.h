@@ -33,7 +33,9 @@ public:
 	void OnSocketStateChanged(QAbstractSocket::SocketState socketState);
 	void OnRecvMessage(const QString&);
 	QString JsonToString(const QJsonObject& json) const;
-
+	void gb2312ToUtf8(QString strGb2312);
+	void utf8ToGb2312(char *strUtf8);
+	QString utf8ToGb2312_new(char *strUtf8);
 private slots:
 	void on_pushButton_radioOpen_clicked();
 	void on_pushButton_radioClose_clicked();
@@ -49,6 +51,9 @@ private slots:
 	void on_pushButton_setCfg_clicked();
 
 	void on_pushButton_sendMessage_clicked();
+	void on_pushButton_3_clicked();
+	void on_pushButton_2_clicked();
+	void on_pushButton_clicked();
 
 	void on_pushButton_clean_clicked();
 
@@ -63,7 +68,7 @@ private:
 	QTcpServer listener_;
 	QList<SocketConnection *> connect_socket_list_;
 
-	void Send(const QString& msg);
+	void Send(QString& msg);
 	void DealRecvMessage(QString msg);
 	void showMessage(QString value);
 	QString toStringJsonArray(QJsonArray & arr);

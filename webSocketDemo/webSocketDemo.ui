@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1652</width>
-    <height>876</height>
+    <width>1465</width>
+    <height>853</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -918,7 +918,7 @@ QPushButton:!enabled {
            <x>0</x>
            <y>0</y>
            <width>218</width>
-           <height>644</height>
+           <height>588</height>
           </rect>
          </property>
          <attribute name="label">
@@ -1115,7 +1115,7 @@ QPushButton:!enabled {
             </property>
             <item>
              <property name="text">
-              <string>业务考核模式</string>
+              <string>业务呼叫模式</string>
              </property>
             </item>
             <item>
@@ -1145,8 +1145,8 @@ QPushButton:!enabled {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>191</width>
-           <height>183</height>
+           <width>198</width>
+           <height>588</height>
           </rect>
          </property>
          <attribute name="label">
@@ -1223,6 +1223,21 @@ QPushButton:!enabled {
             <item>
              <property name="text">
               <string>7</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>9</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>10</string>
              </property>
             </item>
            </widget>
@@ -1519,6 +1534,13 @@ QPushButton:!enabled {
         </widget>
        </widget>
       </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>清除所有消息</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="0" column="1">
@@ -1588,6 +1610,13 @@ QPushButton:!enabled {
             <item row="0" column="0">
              <widget class="QTableView" name="tableView_2"/>
             </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="text">
+               <string>清除</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -1605,6 +1634,13 @@ QPushButton:!enabled {
            <layout class="QGridLayout" name="gridLayout_14">
             <item row="0" column="0">
              <widget class="QTableView" name="tableView"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>清除</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

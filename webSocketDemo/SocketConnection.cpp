@@ -30,8 +30,13 @@ void SocketConnection::OnReadyRead() {
 	QTcpSocket* socket = static_cast<QTcpSocket *>(QObject::sender());
 
 	QByteArray msg_ba = socket->readAll();
-	QString msg = QTextCodec::codecForName("UTF-8")->toUnicode(msg_ba);
+	qDebug()<< "ReadyRead recv data length:"  << msg_ba.length() << "##" << msg_ba;
 
+ 	QString msg = QTextCodec::codecForName("gb2312")->toUnicode(msg_ba);
+	
+	//QString msg = QTextCodec::codecForName("UTF-8")->toUnicode(msg_ba);
+	
+ 	qDebug() << "ReadyRead recv data:" << msg;
 	if (!is_handshaked_) {
 		is_data_masked_ = true;
 		QStringList handshakeLines = msg.split(NewLine);

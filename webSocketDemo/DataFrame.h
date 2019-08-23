@@ -5,6 +5,8 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QTextCodec>
+
 class DataFrameHeader {
 private:
 	bool fin_;
@@ -38,7 +40,7 @@ class DataFrame : public QObject
 public:
 	DataFrame(const QByteArray& buffer);
 	DataFrame(const QString& content);
-
+	DataFrame(QString& content,const QString& flag);
 	~DataFrame();
 
 	QByteArray GetByteArray();

@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QTextCodec>
 
 
 webSocketDemo::webSocketDemo(QWidget *parent)
@@ -87,6 +88,50 @@ webSocketDemo::~webSocketDemo()
 	Close();
 }
 
+
+void webSocketDemo::gb2312ToUtf8(QString strGb2312)
+{
+	printf("@@@ gb2312 str is:%s\n", strGb2312.toLocal8Bit().data());
+	QTextCodec* utf8Codec = QTextCodec::codecForName("utf-8");
+	QTextCodec* gb2312Codec = QTextCodec::codecForName("gb2312");
+
+	QString strUnicode = gb2312Codec->toUnicode(strGb2312.toLocal8Bit().data());
+	QByteArray ByteUtf8 = utf8Codec->fromUnicode(strUnicode);
+
+	char *utf8code = ByteUtf8.data();
+	printf("@@@ Utf8  strGb2312toUtf8:%s\n", utf8code);
+}
+
+///////////////////////////////////////////////////////////////////////
+
+void webSocketDemo::utf8ToGb2312(char *strUtf8)
+{
+	printf("~~~~ utf8  str is:%s\n", strUtf8);
+	QTextCodec* utf8Codec = QTextCodec::codecForName("utf-8");
+	QTextCodec* gb2312Codec = QTextCodec::codecForName("gb2312");
+
+	QString strUnicode = utf8Codec->toUnicode(strUtf8);
+	QByteArray ByteGb2312 = gb2312Codec->fromUnicode(strUnicode);
+
+	strUtf8 = ByteGb2312.data();
+	printf("~~~~~ gb2312	strUtf8toGb2312:%s\n", strUtf8);
+}
+
+QString webSocketDemo::utf8ToGb2312_new(char *strUtf8)
+{
+	printf("~~~~utf8  strUtf8:%s\n", strUtf8);
+	QTextCodec* utf8Codec = QTextCodec::codecForName("utf-8");
+	QTextCodec* gb2312Codec = QTextCodec::codecForName("gb2312");
+
+	QString strUnicode = utf8Codec->toUnicode(strUtf8);
+	QByteArray ByteGb2312 = gb2312Codec->fromUnicode(strUnicode);
+
+	strUtf8 = ByteGb2312.data();
+	printf("~~~~~gb2312	strUtf8toGb2312:%s\n", strUtf8);
+	return QString::fromLocal8Bit(strUtf8);//注意这里要fromLocal8Bit()
+}
+
+
 void webSocketDemo::on_lineEdit_2_textChanged(QString s)
 {
 	QSettings * ini = new QSettings("config.ini", QSettings::IniFormat);
@@ -147,11 +192,8 @@ void webSocketDemo::OnNewConnection() {
 void webSocketDemo::OnSocketStateChanged(QAbstractSocket::SocketState socketState) {
 	if (socketState == QAbstractSocket::UnconnectedState) {
 		SocketConnection* sc = static_cast<SocketConnection *>(QObject::sender());
-
 		Send(QString("【%1】离开了聊天室！").arg(sc->GetName()));
-
 		connect_socket_list_.removeOne(sc);
-
 		delete sc;
 	}
 }
@@ -164,7 +206,7 @@ void webSocketDemo::OnRecvMessage(const QString& msg) {
 		sc->SetName(name);
 
 		QString loginMsg = QString("欢迎【%1】来到聊天室！").arg(name);
-		Send(loginMsg);
+		//Send(loginMsg);
 
 		return;
 	}
@@ -279,14 +321,13 @@ void webSocketDemo::DealRecvMessage(QString msg)
 				ui.checkBox_4->setChecked(true);
 				ui.label_36->setText(QString().number(argsObject["longitude"].toDouble()));
 				ui.label_37->setText(QString().number(argsObject["latitude"].toDouble()));
-				ui.label_38->setText(QString().number(argsObject["height"].toInt()));
+				ui.label_38->setText(QString().number(argsObject["height"].toDouble()));
 
 				ui.label_39->setText(QString().number(argsObject["rmtaddr"].toInt()));
 				ui.label_41->setText(QString().number(argsObject["rmt_longitude"].toDouble()));
 				ui.label_42->setText(QString().number(argsObject["rmt_latitude"].toDouble()));
-				ui.label_40->setText(QString().number(argsObject["rmt_height"].toInt()));
-
-				ui.label_43->setText(QString().number(argsObject["distance"].toInt()));
+				ui.label_40->setText(QString().number(argsObject["rmt_height"].toDouble()));
+				ui.label_43->setText(QString().number(argsObject["distance"].toDouble()));
 			}
 			else
 			{
@@ -401,6 +442,8 @@ void webSocketDemo::DealRecvMessage(QString msg)
 			ui.tableView->setColumnWidth(3, 40);
 			ui.tableView->setColumnWidth(4, 40);
 			ui.tableView->setColumnWidth(5, 40);
+
+			ui.tableView->scrollToBottom();
 			showMessage(QString("%1").arg(QStringLiteral("探测时的频率信息与信道质量信息")));
 			break;
 		case 25:		//"connect_ok_channel_snr",		//建联成功时的频率信息与信道质量信息
@@ -414,10 +457,9 @@ void webSocketDemo::DealRecvMessage(QString msg)
 			model2->setItem(rcount, 4, new QStandardItem(QString().number(tmpObj["rx"].toInt())));
 			model2->setItem(rcount, 5, new QStandardItem(QString().number(tmpObj["tx"].toInt())));
 			model2->setItem(rcount, 6, new QStandardItem(QString().number(tmpObj["result"].toInt())));
-
-			model2->setItem(rcount, 7, new QStandardItem((jsonObject["state"].toString() == QStringLiteral("active")?QStringLiteral("主动建联"):QStringLiteral("被动建联"))));
-			model2->setItem(rcount, 8, new QStandardItem((jsonObject["mode"].toString() == QStringLiteral("normal") ? QStringLiteral("业务呼叫") : QStringLiteral("考核呼叫"))));
-
+			model2->setItem(rcount, 7, new QStandardItem((argsObject["state"].toString() == "active")?QStringLiteral("主动建联"):QStringLiteral("被动建联")));
+			model2->setItem(rcount, 8, new QStandardItem((argsObject["mode"].toString() == "normal")?QStringLiteral("业务呼叫") : QStringLiteral("考核呼叫")));
+			
 			model2->setHeaderData(0, Qt::Horizontal, QStringLiteral("Src本址"));
 			model2->setHeaderData(1, Qt::Horizontal, QStringLiteral("Dst本址"));
 			model2->setHeaderData(2, Qt::Horizontal, QStringLiteral("Rx频率"));
@@ -430,7 +472,6 @@ void webSocketDemo::DealRecvMessage(QString msg)
 			model2->setHeaderData(7, Qt::Horizontal, QStringLiteral("方式"));
 			model2->setHeaderData(8, Qt::Horizontal, QStringLiteral("模式"));
 
-
 			ui.tableView_2->setColumnWidth(0, 60);
 			ui.tableView_2->setColumnWidth(1, 60);
 			ui.tableView_2->setColumnWidth(2, 60);
@@ -440,6 +481,8 @@ void webSocketDemo::DealRecvMessage(QString msg)
 			ui.tableView_2->setColumnWidth(6, 40);
 			ui.tableView_2->setColumnWidth(7, 60);
 			ui.tableView_2->setColumnWidth(8, 60);
+
+			ui.tableView_2->scrollToBottom();
 			showMessage(QString("%1").arg(QStringLiteral("建联成功时的频率信息与信道质量信息")));
 			break;
 		case 26:		//"ack_sent_msg_ctl",			//回复类型为发送短报文的ACK
@@ -458,7 +501,7 @@ void webSocketDemo::DealRecvMessage(QString msg)
 	}
 }
 
-void webSocketDemo::Send(const QString& msg) {
+void webSocketDemo::Send(QString& msg) {
 	QList<SocketConnection *>::iterator iter = connect_socket_list_.begin();
 	for (; iter != connect_socket_list_.end(); ++iter) {
 		SocketConnection* sc = *iter;
@@ -466,7 +509,7 @@ void webSocketDemo::Send(const QString& msg) {
 		if (sc->GetSocket()->state() != QAbstractSocket::ConnectedState) continue;
 
 		if (sc->GetIsDataMasked()) {
-			DataFrame dr(msg);
+			DataFrame dr(msg,"");
 			qDebug() << dr.GetByteArray();
 			sc->GetSocket()->write(dr.GetByteArray());
 		}
@@ -556,11 +599,59 @@ void webSocketDemo::on_pushButton_setCfg_clicked()
 
 void webSocketDemo::on_pushButton_sendMessage_clicked()
 {
-	QString s = QString("{\"msg\":\"request\",\"type\":\"sent_msg_ctl\",\"addr\":%1,\"args\":{\"content\":%2 ,\"rmtaddr\":%3,\"sn\":\"%4\"}}")
+	QString s = QString("{\"msg\":\"request\",\"type\":\"sent_msg_ctl\",\"addr\":%1,\"args\":{\"content\":\"%2\" ,\"rmtaddr\":%3,\"sn\":\"%4\"}}")
 		.arg(ui.lineEdit_2->text().trimmed())
-		.arg(ui.textEdit->toPlainText())
+		.arg((ui.textEdit->toPlainText()))
 		.arg(ui.lineEdit_3->text().trimmed())
 		.arg(QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
 	addMessage(s);
+
 	ui.textEdit->setText("");
+}
+
+
+void webSocketDemo::on_pushButton_2_clicked()
+{
+	model2->removeRows(0, model2->rowCount());
+}
+
+void webSocketDemo::on_pushButton_clicked()
+{
+	model1->removeRows(0, model1->rowCount());
+}
+
+void webSocketDemo::on_pushButton_3_clicked()
+{
+	model1->removeRows(0, model2->rowCount());
+	model2->removeRows(0, model2->rowCount());
+	ui.textBrowser->setText("");
+	ui.textBrowser_2->setText("");
+
+	ui.checkBox_4->setCheckState(Qt::Unchecked);
+	ui.label_36->setText("");
+	ui.label_37->setText("");
+	ui.label_38->setText("");
+	
+	ui.label_39->setText("");
+	ui.label_40->setText("");
+	ui.label_41->setText("");
+	ui.label_42->setText("");
+
+	ui.label_43->setText("");
+
+	ui.checkBox->setCheckState(Qt::Unchecked);
+	ui.checkBox_2->setCheckState(Qt::Unchecked);
+	ui.checkBox_3->setCheckState(Qt::Unchecked);
+	ui.label_15->setText("");
+
+	ui.lineEdit_5->setText("");
+	ui.lineEdit_6->setText("");
+	ui.lineEdit_7->setText("");
+	ui.lineEdit_8->setText("");
+	ui.lineEdit_9->setText("");
+
+	ui.lineEdit_10->setText("");
+	ui.lineEdit_11->setText("");
+	ui.lineEdit_12->setText("");
+	ui.lineEdit_13->setText("");
 }

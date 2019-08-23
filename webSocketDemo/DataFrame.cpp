@@ -118,6 +118,43 @@ DataFrame::DataFrame(const QString& content)
 	}
 }
 
+DataFrame::DataFrame(QString& content, const QString& flag)
+{
+	content_ = content.toLocal8Bit();
+
+	qDebug() << "content_:" << content_;
+	char* data0 = content_.data();
+
+	//content_ = content.toUtf8();
+	int length = content_.size();
+
+	if (length < 126) {
+		header_.EncodeHeader(true, false, false, false, 1, false, length);
+	}
+	else if (length < 65536) {
+		extend_.resize(2);
+		header_.EncodeHeader(true, false, false, false, 1, false, 126);
+		extend_[0] = length / 256;
+		extend_[1] = length % 256;
+	}
+	else {
+		extend_.resize(8);
+		header_.EncodeHeader(true, false, false, false, 1, false, 127);
+
+		int left = length;
+		int unit = 256;
+
+		for (int i = 7; i > 1; i--)
+		{
+			extend_[i] = left % unit;
+			left = left / unit;
+
+			if (left == 0)
+				break;
+		}
+	}
+}
+
 DataFrame::~DataFrame()
 {
 
@@ -140,7 +177,8 @@ QString DataFrame::Text() {
 	if (header_.OpCode() != 1)
 		return QString();
 
-	return QTextCodec::codecForName("UTF-8")->toUnicode(content_);
+	//return QTextCodec::codecForName("UTF-8")->toUnicode(content_);
+	return QTextCodec::codecForName("gb2312")->toUnicode(content_);
 }
 
 void DataFrame::Mask(QByteArray& data, const QByteArray& mask) {
